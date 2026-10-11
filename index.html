@@ -257,6 +257,35 @@ table.dt th.num { text-align: right; }
 .note { font-size: 14px; color: var(--muted); }
 footer { padding-top: 32px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
 
+/* Demo interactiva */
+.demo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 24px 32px; align-items: start; }
+@media (max-width: 940px) { .demo { grid-template-columns: minmax(0, 1fr); } }
+.demo-left { display: grid; gap: 14px; min-width: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chipbtn { font: 500 14px var(--font-body); padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.chipbtn[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chipbtn:disabled { cursor: not-allowed; opacity: .6; }
+.run-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.run-row .btn:disabled { opacity: .55; cursor: wait; }
+.tl { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; min-width: 0; }
+.st { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; padding: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; min-width: 0; }
+.st .badge { width: 36px; height: 36px; border-radius: 10px; }
+.st .badge .ico { width: 20px; height: 20px; }
+.st-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; align-items: baseline; }
+.st-head b { font-family: var(--font-display); font-size: 1rem; }
+.st-state { font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.st .out { margin: 6px 0 0; font-family: var(--font-mono); font-size: 12px; color: var(--muted); white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.5; }
+.st[data-s="pending"] { opacity: .55; }
+.st[data-s="active"] { border-color: var(--c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 18%, transparent); }
+.st[data-s="active"] .st-state { color: var(--c); }
+.st[data-s="done"] .st-state { color: var(--signal); }
+.st[data-s="done"] .out { color: var(--ink); }
+.results { margin-top: 24px; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+@media (max-width: 940px) { .results { grid-template-columns: minmax(0, 1fr); } }
+table.dt tr.newrow td { background: color-mix(in srgb, var(--signal) 12%, transparent); }
+.pending-note { color: var(--muted); font-size: 14px; }
+@media (prefers-reduced-motion: no-preference) { .st { transition: opacity .25s, border-color .25s, box-shadow .25s; } }
+
 /* Cerebro en Obsidian */
 .brain { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px 48px; align-items: center; }
 @media (max-width: 820px) { .brain { grid-template-columns: minmax(0, 1fr); } }
@@ -326,11 +355,11 @@ footer { padding-top: 32px; border-top: 1px solid var(--line); font-size: 13px; 
   <header class="top">
     <div class="brand">Andres Galvis</div>
     <nav aria-label="Secciones">
+      <a href="#demo">Demo</a>
       <a href="#servicios">Servicios</a>
       <a href="#ejemplos">Ejemplos</a>
       <a href="#cerebro">Método</a>
       <a href="#contratar">Contratar</a>
-      <a href="#preguntas">Preguntas</a>
       <a class="btn small primary" data-wa href="#contacto">WhatsApp</a>
     </nav>
   </header>
@@ -342,7 +371,7 @@ footer { padding-top: 32px; border-top: 1px solid var(--line); font-size: 13px; 
       <p class="lede">Soy <strong>ingeniero de IA</strong>. Diseño automatizaciones que leen con inteligencia artificial los correos y documentos de tu empresa, guardan la información en tablas ordenadas de Databricks y avisan por Teams o por correo a quien debe actuar. Trabajo en dos frentes: <strong>IA aplicada</strong> y <strong>datos</strong>.</p>
       <div class="cta">
         <a class="btn primary" data-wa href="#contacto">Escríbeme por WhatsApp</a>
-        <a class="btn" href="#ejemplos">Ver ejemplos de flujos</a>
+        <a class="btn" href="#demo">Ver la demo</a>
       </div>
 
       <ol class="flow" aria-label="Flujo general de las automatizaciones">
@@ -354,6 +383,37 @@ footer { padding-top: 32px; border-top: 1px solid var(--line); font-size: 13px; 
       </ol>
       <p class="flow-cap">El flujo base. Cambian las reglas, los campos y los destinatarios según tu proceso.</p>
     </div>
+
+    <section id="demo">
+      <div class="sec-head">
+        <span class="label">Demo</span>
+        <h2>Míralo funcionar</h2>
+        <p>Elige un correo de ejemplo y pulsa «Procesar correo». Verás cada paso del flujo, la fila que se agrega a la tabla y el aviso que sale. Es una simulación con datos ficticios.</p>
+      </div>
+      <div class="demo">
+        <div class="demo-left">
+          <span class="label">Correo de entrada</span>
+          <div class="chips" id="chips" role="group" aria-label="Correo de ejemplo"></div>
+          <div class="mock mail" id="mail"></div>
+          <div class="run-row">
+            <button class="btn primary" id="run" type="button">Procesar correo</button>
+            <span class="note" id="demo-status" role="status" aria-live="polite"></span>
+          </div>
+        </div>
+        <ol class="tl" id="tl" aria-label="Pasos del flujo"></ol>
+      </div>
+      <div class="results">
+        <div class="panel">
+          <span class="label t-data"><i>4</i>Se guarda</span>
+          <div class="mock tbl-wrap" id="tbl"></div>
+        </div>
+        <div class="panel">
+          <span class="label t-out"><i>5</i>Se avisa</span>
+          <div class="mock" id="notify"></div>
+        </div>
+      </div>
+      <p class="ex-note">Simulación ilustrativa. En un proyecto real, el flujo corre con tus correos, tus reglas y tus sistemas.</p>
+    </section>
 
     <section id="servicios">
       <div class="sec-head">
@@ -728,20 +788,189 @@ footer { padding-top: 32px; border-top: 1px solid var(--line); font-size: 13px; 
         <span class="label">Contacto</span>
         <h2>¿Qué correos te quitan tiempo hoy?</h2>
         <p style="color:var(--muted);max-width:56ch">Escríbeme por WhatsApp, cuéntame qué recibes y qué haces con cada mensaje. Te digo si se puede automatizar y cómo lo haríamos.</p>
-        <a class="btn primary big" data-wa href="#contacto">Escribir por WhatsApp</a>
+        <div class="cta" style="margin-top:0">
+          <a class="btn primary big" data-wa href="#contacto">Escribir por WhatsApp</a>
+          <a class="btn big" href="https://www.linkedin.com/in/andres-galvis-44abb31a8" target="_blank" rel="noopener">Ver mi LinkedIn</a>
+        </div>
         <p class="note" id="wa-nota" role="status"></p>
       </div>
     </section>
   </main>
 
   <footer>
-    <span>Andres Galvis · Ingeniero de IA y datos · Colombia</span>
+    <span>Andres Galvis · Ingeniero de IA y datos · Colombia · <a href="https://www.linkedin.com/in/andres-galvis-44abb31a8" target="_blank" rel="noopener">LinkedIn</a></span>
     <span class="mono">Correo → Automatización → Databricks → Aviso</span>
   </footer>
 </div>
 
 <a class="btn float-wa" data-wa href="#contacto" aria-label="Escribir por WhatsApp">WhatsApp</a>
 
+<script>
+(function () {
+  var TITLES = [
+    { lab: 'Entra', t: 'Correo', icon: 'mail', c: 'in' },
+    { lab: 'Automatiza', t: 'n8n o Power Automate', icon: 'bolt', c: 'auto' },
+    { lab: 'Entiende', t: 'IA', icon: 'sparkle', c: 'ai' },
+    { lab: 'Guarda', t: 'Databricks', icon: 'db', c: 'data' },
+    { lab: 'Avisa', t: '', icon: '', c: 'out' }
+  ];
+  var CHIP = { 'urgente': 'hot', 'alta': 'hot', 'media': 'warn', 'baja': 'idle', 'por pagar': 'idle', 'nuevo': 'idle', 'validado': 'ok' };
+  var SC = {
+    factura: {
+      label: 'Factura de proveedor',
+      mail: { from: 'facturacion@proveedor-c.example', subject: 'Factura FE-1044 de octubre', body: 'Buen día. Adjuntamos la factura del mes. Quedamos atentos.', clip: 'PDF · FE-1044.pdf' },
+      steps: [
+        'Correo recibido con 1 adjunto PDF.',
+        'n8n descarga el adjunto y lo envía a la IA.',
+        'factura: FE-1044\nproveedor: Proveedor C\nvalor_cop: 9.700.000\nvence: 2026-10-12',
+        'Fila nueva en main.finanzas.facturas_recibidas.',
+        'Regla: vence en 3 días o menos. Aviso enviado a Teams.'
+      ],
+      table: { name: 'main.finanzas.facturas_recibidas', cols: ['factura', 'proveedor', 'valor_cop', 'vence', 'estado'], num: [2],
+        rows: [['FE-1042', 'Proveedor A', '4.850.000', '2026-10-14', 'por pagar'], ['FE-1043', 'Proveedor B', '1.220.000', '2026-10-30', 'por pagar']],
+        add: ['FE-1044', 'Proveedor C', '9.700.000', '2026-10-12', 'urgente'] },
+      notify: { kind: 'teams', where: 'Teams · canal Cuentas por pagar', time: '8:02', text: 'La factura FE-1044 de Proveedor C vence en 2 días. Valor: $9.700.000.', chip: 'Vence pronto' }
+    },
+    reclamo: {
+      label: 'Reclamo de cliente',
+      mail: { from: 'cliente@ejemplo.example', subject: 'Mi pedido 5521 llegó con una pieza dañada', body: 'Buenas tardes. Recibí el pedido hoy y una de las piezas viene rota. Necesito que me la cambien lo antes posible.', clip: '' },
+      steps: [
+        'Correo recibido sin adjuntos.',
+        'Power Automate detecta el correo y lo envía a la IA.',
+        'tipo: reclamo\nurgencia: alta\narea: postventa\nresumen: pieza dañada en el pedido 5521, pide cambio',
+        'Fila nueva en main.servicio.solicitudes.',
+        'Regla: urgencia alta. Correo enviado al área de postventa.'
+      ],
+      table: { name: 'main.servicio.solicitudes', cols: ['id', 'tipo', 'urgencia', 'area', 'estado'], num: [],
+        rows: [['S-202', 'cotización', 'media', 'ventas', 'nuevo'], ['S-203', 'consulta', 'baja', 'soporte', 'nuevo']],
+        add: ['S-204', 'reclamo', 'alta', 'postventa', 'nuevo'] },
+      notify: { kind: 'mail', to: 'postventa@empresa.example', subject: '[Alta] Reclamo S-204', text: 'Resumen: el cliente recibió el pedido 5521 con una pieza dañada y pide el cambio. Conviene responder hoy.' }
+    },
+    reporte: {
+      label: 'Reporte de una sede',
+      mail: { from: 'sede.centro@empresa.example', subject: 'Ventas del 9 de octubre', body: 'Se adjunta el cierre del día.', clip: 'XLSX · ventas_centro.xlsx' },
+      steps: [
+        'Correo recibido con 1 adjunto Excel.',
+        'n8n lee las hojas del archivo.',
+        'fecha: 2026-10-09\nsede: Centro\nventas_cop: 31.800.000\nunidades: 36\nformato: correcto',
+        'Fila nueva en main.operacion.ventas_diarias.',
+        'Regla: ya reportaron las 3 sedes. Resumen enviado a gerencia.'
+      ],
+      table: { name: 'main.operacion.ventas_diarias', cols: ['fecha', 'sede', 'ventas_cop', 'unid.', 'estado'], num: [2, 3],
+        rows: [['2026-10-09', 'Norte', '38.400.000', '41', 'validado'], ['2026-10-09', 'Sur', '29.150.000', '33', 'validado']],
+        add: ['2026-10-09', 'Centro', '31.800.000', '36', 'validado'] },
+      notify: { kind: 'mail', to: 'gerencia@empresa.example', subject: 'Ventas del 9 de octubre', text: 'Total del día: $99.350.000 en las 3 sedes. Todas reportaron.' }
+    }
+  };
+  var ORDER = ['factura', 'reclamo', 'reporte'];
+  var cur = 'factura', running = false, timers = [];
+  var $ = function (id) { return document.getElementById(id); };
+  var chipsEl = $('chips'), mailEl = $('mail'), tlEl = $('tl'), tblEl = $('tbl'), notEl = $('notify'), runBtn = $('run'), statusEl = $('demo-status');
+  if (!chipsEl) { return; }
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var DELAY = reduce ? 200 : 950;
+
+  function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+  function renderChips() {
+    chipsEl.innerHTML = '';
+    ORDER.forEach(function (k) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'chipbtn'; b.textContent = SC[k].label;
+      b.setAttribute('aria-pressed', k === cur ? 'true' : 'false');
+      b.disabled = running;
+      b.addEventListener('click', function () { if (running || k === cur) { return; } cur = k; renderAll(true); });
+      chipsEl.appendChild(b);
+    });
+  }
+  function renderMail() {
+    var m = SC[cur].mail;
+    mailEl.innerHTML = '<dl><dt>De</dt><dd>' + esc(m.from) + '</dd><dt>Asunto</dt><dd>' + esc(m.subject) + '</dd></dl><hr><p>' + esc(m.body) + '</p>' +
+      (m.clip ? '<span class="clip">' + esc(m.clip) + '</span>' : '');
+  }
+  function renderTimeline(state) {
+    var sc = SC[cur], n = sc.notify;
+    tlEl.innerHTML = '';
+    TITLES.forEach(function (T, i) {
+      var title = i === 4 ? (n.kind === 'teams' ? 'Teams' : 'Correo') : T.t;
+      var icon = i === 4 ? (n.kind === 'teams' ? 'chat' : 'send') : T.icon;
+      var li = document.createElement('li');
+      li.className = 'st t-' + T.c;
+      li.innerHTML = '<span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-' + icon + '"/></svg></span>' +
+        '<div><div class="st-head"><b>' + (i + 1) + '. ' + esc(title) + '</b><span class="st-state"></span></div><p class="out" hidden></p></div>';
+      tlEl.appendChild(li);
+      setStep(i, state);
+    });
+  }
+  function setStep(i, state) {
+    var li = tlEl.children[i]; if (!li) { return; }
+    li.setAttribute('data-s', state);
+    li.querySelector('.st-state').textContent = state === 'done' ? 'Listo' : (state === 'active' ? 'Procesando…' : 'En espera');
+    var out = li.querySelector('.out');
+    out.textContent = SC[cur].steps[i];
+    out.hidden = state !== 'done';
+  }
+  function chip(v) { var tone = CHIP[v]; return tone ? '<span class="chip ' + tone + '">' + esc(v) + '</span>' : esc(v); }
+  function renderTable(withNew) {
+    var t = SC[cur].table, h = '<table class="dt"><caption>' + esc(t.name) + '</caption><thead><tr>';
+    t.cols.forEach(function (c, i) { h += '<th' + (t.num.indexOf(i) >= 0 ? ' class="num"' : '') + '>' + esc(c) + '</th>'; });
+    h += '</tr></thead><tbody>';
+    var rows = t.rows.slice(); if (withNew) { rows.push(t.add); }
+    rows.forEach(function (r, ri) {
+      var isNew = withNew && ri === rows.length - 1;
+      h += '<tr' + (isNew ? ' class="newrow"' : '') + '>';
+      r.forEach(function (c, i) { h += '<td' + (t.num.indexOf(i) >= 0 ? ' class="num"' : '') + '>' + chip(c) + '</td>'; });
+      h += '</tr>';
+    });
+    tblEl.innerHTML = h + '</tbody></table>';
+  }
+  function renderNotify(show) {
+    var n = SC[cur].notify;
+    if (!show) { notEl.innerHTML = '<p class="pending-note">El aviso aparece cuando termina el paso 5.</p>'; return; }
+    if (n.kind === 'teams') {
+      notEl.innerHTML = '<div class="chat-top">' + esc(n.where) + '</div><div class="msg"><span class="av" aria-hidden="true">BOT</span><div><b>Bot de automatización</b><time>' + esc(n.time) + '</time><p>' + esc(n.text) + '</p><span class="chip hot">' + esc(n.chip) + '</span></div></div>';
+    } else {
+      notEl.className = 'mock mail';
+      notEl.innerHTML = '<dl><dt>Para</dt><dd>' + esc(n.to) + '</dd><dt>Asunto</dt><dd>' + esc(n.subject) + '</dd></dl><hr><p>' + esc(n.text) + '</p>';
+      return;
+    }
+    notEl.className = 'mock';
+  }
+  function renderAll(done) {
+    renderChips(); renderMail();
+    notEl.className = 'mock';
+    renderTimeline(done ? 'done' : 'pending');
+    renderTable(done); renderNotify(done);
+    runBtn.textContent = 'Volver a ejecutar';
+    statusEl.textContent = '';
+  }
+  function clearTimers() { timers.forEach(clearTimeout); timers = []; }
+  function run() {
+    if (running) { return; }
+    running = true; clearTimers();
+    runBtn.disabled = true; runBtn.textContent = 'Procesando…';
+    renderChips(); notEl.className = 'mock';
+    renderTimeline('pending'); renderTable(false); renderNotify(false);
+    var i = 0;
+    function step() {
+      if (i >= 5) { finish(); return; }
+      setStep(i, 'active');
+      statusEl.textContent = 'Paso ' + (i + 1) + ' de 5: ' + (i === 4 ? (SC[cur].notify.kind === 'teams' ? 'Teams' : 'Correo') : TITLES[i].t);
+      var k = i;
+      timers.push(setTimeout(function () { setStep(k, 'done'); i = k + 1; step(); }, DELAY));
+    }
+    step();
+  }
+  function finish() {
+    renderTable(true); renderNotify(true);
+    running = false; runBtn.disabled = false; runBtn.textContent = 'Volver a ejecutar';
+    statusEl.textContent = 'Listo: fila agregada y aviso enviado.';
+    renderChips();
+  }
+  runBtn.addEventListener('click', run);
+  renderAll(true);
+})();
+</script>
 <script>
 (function () {
   // Número con indicativo de país y sin signos. Ejemplo: '573001234567'
