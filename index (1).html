@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Ingeniero de IA y datos. Automatizo correos y documentos con IA, n8n, Power Automate y Databricks, con avisos por Teams o correo.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Andres Galvis, ingeniero de IA y datos">
+<meta property="og:description" content="Ingeniero de IA y datos. Automatizo correos y documentos con IA, n8n, Power Automate y Databricks, con avisos por Teams o correo.">
+<style>html{color-scheme:light}body{margin:0}img{max-width:100%}</style>
+<title>Andres Galvis Portafolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Concepto: el portafolio se lee como un flujo de trabajo. Cada ejemplo muestra correo que entra, tabla que se llena y aviso que sale. Un solo acento calido sobre neutros frios. */
+:root {
+  --bg: #EDF0F3;
+  --surface: #FFFFFF;
+  --sunken: #F5F7F9;
+  --ink: #131C26;
+  --muted: #55626F;
+  --line: #CFD6DD;
+  --accent: #C93E22;
+  --accent-ink: #FFFFFF;
+  --signal: #0B6F5F;
+  --warn: #9A5B00;
+  --c-in: #2F6FDE; --c-auto: #C93E22; --c-ai: #6B4FD8; --c-data: #0B6F5F; --c-out: #A8650A;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0D1319; --surface: #151D26; --sunken: #101820; --ink: #E8EDF2; --muted: #98A5B2;
+    --line: #26323E; --accent: #F26B4A; --accent-ink: #1A0D08; --signal: #3CC5AC; --warn: #E8A93C;
+    --c-in: #6EA0FF; --c-auto: #F26B4A; --c-ai: #A18CFF; --c-data: #3CC5AC; --c-out: #E8A93C;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0D1319; --surface: #151D26; --sunken: #101820; --ink: #E8EDF2; --muted: #98A5B2;
+  --line: #26323E; --accent: #F26B4A; --accent-ink: #1A0D08; --signal: #3CC5AC; --warn: #E8A93C;
+    --c-in: #6EA0FF; --c-auto: #F26B4A; --c-ai: #A18CFF; --c-data: #3CC5AC; --c-out: #E8A93C;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  padding-inline: clamp(16px, 4vw, 40px);
+  padding-block: 0 96px;
+}
+.wrap { max-width: 1080px; margin-inline: auto; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.1; }
+p { margin: 0; }
+a { color: inherit; }
+.mono { font-family: var(--font-mono); }
+.label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Barra superior */
+.top {
+  display: flex; flex-wrap: wrap; gap: 12px 24px;
+  align-items: center; justify-content: space-between;
+  padding-block: 16px;
+  border-bottom: 1px solid var(--line);
+}
+.brand { font-family: var(--font-display); font-weight: 700; font-size: 18px; }
+.top nav { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 14px; align-items: center; }
+.top nav a { text-decoration: none; color: var(--muted); }
+.top nav a:hover { color: var(--ink); }
+
+/* Botones */
+.btn {
+  font: 600 15px var(--font-body);
+  padding: 12px 20px; border-radius: 6px; text-decoration: none;
+  border: 1px solid var(--ink); color: var(--ink); background: transparent;
+  cursor: pointer; display: inline-block; text-align: center;
+}
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.small { padding: 8px 14px; font-size: 14px; }
+.btn:hover { filter: brightness(1.08); }
+.btn[aria-disabled="true"] { opacity: .55; cursor: not-allowed; }
+.top nav a.btn { color: var(--accent-ink); }
+
+/* Hero */
+.hero { padding-block: clamp(40px, 8vw, 80px) 48px; }
+.status {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em;
+  border: 1px solid var(--line); background: var(--surface);
+  padding: 6px 12px; border-radius: 999px; margin-bottom: 24px;
+}
+.status i { width: 8px; height: 8px; border-radius: 50%; background: var(--signal); display: block; }
+.hero h1 {
+  font-size: clamp(2.2rem, 6.4vw, 4.4rem);
+  font-weight: 700; letter-spacing: -0.02em; max-width: 17ch;
+}
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero .lede { margin-top: 24px; max-width: 60ch; font-size: 1.125rem; color: var(--muted); }
+.hero .lede strong { color: var(--ink); font-weight: 600; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+/* Flujo como lienzo de automatizacion */
+.t-in { --c: var(--c-in); } .t-auto { --c: var(--c-auto); } .t-ai { --c: var(--c-ai); } .t-data { --c: var(--c-data); } .t-out { --c: var(--c-out); }
+.flow {
+  list-style: none; margin: 40px 0 0; padding: 20px;
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 32px;
+  border: 1px solid var(--line); border-radius: 16px;
+  background-color: var(--sunken);
+  background-image: radial-gradient(color-mix(in srgb, var(--muted) 38%, transparent) 1px, transparent 1.3px);
+  background-size: 18px 18px;
+}
+.node {
+  position: relative; display: grid; gap: 12px; align-content: start; min-width: 0;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px;
+  box-shadow: 0 1px 2px rgba(19, 28, 38, .06), 0 12px 24px -16px rgba(19, 28, 38, .35);
+}
+.badge {
+  width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center;
+  color: var(--c);
+  background: color-mix(in srgb, var(--c) 14%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--c) 30%, var(--surface));
+}
+.ico { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.node .label { display: block; margin-bottom: 4px; color: var(--c); }
+.node b { font-family: var(--font-display); font-size: 1.05rem; display: block; line-height: 1.2; }
+.node span.sub { font-size: 13px; color: var(--muted); display: block; margin-top: 4px; line-height: 1.4; }
+/* conector */
+.node:not(:last-child)::after {
+  content: ""; position: absolute; top: 34px; left: calc(100% + 2px); width: 28px; height: 2px; border-radius: 2px;
+  background: color-mix(in srgb, var(--muted) 55%, transparent);
+}
+.node:not(:last-child)::before {
+  content: ""; position: absolute; top: 30px; left: calc(100% + 2px); width: 10px; height: 10px; border-radius: 50%; z-index: 1;
+  background: var(--c); box-shadow: 0 0 0 4px color-mix(in srgb, var(--c) 22%, transparent);
+  transform: translateX(9px);
+}
+@keyframes hopX { 0% { transform: translateX(-6px); opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { transform: translateX(20px); opacity: 0; } }
+@keyframes hopY { 0% { transform: translateY(-6px); opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { transform: translateY(18px); opacity: 0; } }
+@media (prefers-reduced-motion: no-preference) {
+  .node:not(:last-child)::before { animation: hopX 2.4s ease-in-out infinite; }
+  .node:nth-child(2)::before { animation-delay: .4s; }
+  .node:nth-child(3)::before { animation-delay: .8s; }
+  .node:nth-child(4)::before { animation-delay: 1.2s; }
+}
+.flow-cap { margin-top: 14px; font-size: 13px; color: var(--muted); }
+
+@media (max-width: 940px) {
+  .flow { grid-template-columns: minmax(0, 1fr); gap: 30px; padding: 16px; }
+  .node { grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: 14px; }
+  .node:not(:last-child)::after { top: calc(100% + 2px); left: 34px; width: 2px; height: 26px; }
+  .node:not(:last-child)::before { top: calc(100% + 2px); left: 29px; transform: translateY(8px); }
+}
+@media (max-width: 940px) and (prefers-reduced-motion: no-preference) {
+  .node:not(:last-child)::before { animation-name: hopY; }
+}
+
+/* Secciones */
+section { padding-block: clamp(40px, 6vw, 72px); border-top: 1px solid var(--line); }
+.sec-head { display: grid; gap: 8px; margin-bottom: 32px; }
+.sec-head h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); letter-spacing: -0.01em; }
+.sec-head p { color: var(--muted); max-width: 62ch; }
+
+/* Ejemplos */
+.examples { display: grid; gap: 24px; }
+.ex { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: clamp(16px, 3vw, 28px); min-width: 0; }
+.ex-head { display: grid; gap: 6px; }
+.ex-head h3 { font-size: 1.5rem; }
+.ex-head p { color: var(--muted); max-width: 64ch; }
+.ex .flow { margin-top: 24px; }
+
+.mocks {
+  margin-top: 28px;
+  display: grid; gap: 16px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr) minmax(0, 1fr);
+  align-items: start;
+}
+@media (max-width: 940px) { .mocks { grid-template-columns: minmax(0, 1fr); } }
+.panel { min-width: 0; display: grid; gap: 8px; }
+.panel > .label { display: flex; align-items: center; gap: 8px; color: var(--c); }
+.panel > .label i { font-style: normal; width: 20px; height: 20px; border-radius: 50%; background: var(--c); color: var(--bg); display: grid; place-items: center; font-size: 11px; letter-spacing: 0; }
+.mock { background: var(--sunken); border: 1px solid var(--line); border-radius: 12px; padding: 14px; font-size: 14px; min-width: 0; }
+.ex-note { margin-top: 18px; font-size: 13px; color: var(--muted); }
+
+/* Maqueta de correo */
+.mail dl { margin: 0 0 10px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 10px; font-size: 13px; }
+.mail dt { color: var(--muted); }
+.mail dd { margin: 0; overflow-wrap: anywhere; }
+.mail p { color: var(--ink); font-size: 14px; line-height: 1.5; }
+.mail hr { border: 0; border-top: 1px solid var(--line); margin: 10px 0; }
+.clip {
+  display: inline-flex; gap: 6px; align-items: center; margin-top: 10px;
+  font-family: var(--font-mono); font-size: 12px;
+  border: 1px solid var(--line); background: var(--surface); border-radius: 4px; padding: 3px 8px;
+}
+
+/* Maqueta de tabla */
+.tbl-wrap { overflow-x: auto; }
+table.dt { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 12px; }
+table.dt caption { text-align: left; color: var(--muted); padding-bottom: 8px; font-size: 12px; overflow-wrap: anywhere; }
+table.dt th { text-align: left; font-weight: 500; color: var(--muted); border-bottom: 1px solid var(--line); padding: 6px 10px 6px 0; white-space: nowrap; }
+table.dt td { padding: 7px 10px 7px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+table.dt tr:last-child td { border-bottom: 0; }
+table.dt td.num { text-align: right; font-variant-numeric: tabular-nums; }
+table.dt th.num { text-align: right; }
+.chip { font-family: var(--font-mono); font-size: 11px; border: 1px solid currentColor; border-radius: 999px; padding: 1px 8px; display: inline-block; }
+.chip.ok { color: var(--signal); }
+.chip.warn { color: var(--warn); }
+.chip.hot { color: var(--accent); }
+.chip.idle { color: var(--muted); }
+
+/* Maqueta de chat */
+.chat-top { font-family: var(--font-mono); font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+.msg { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 10px; }
+.av { width: 32px; height: 32px; border-radius: 50%; background: var(--ink); color: var(--bg); display: grid; place-items: center; font-family: var(--font-mono); font-size: 11px; }
+.msg b { font-size: 14px; }
+.msg time { font-family: var(--font-mono); font-size: 11px; color: var(--muted); margin-left: 6px; }
+.msg p { margin: 4px 0 8px; font-size: 14px; line-height: 1.5; }
+
+/* Herramientas */
+.stack { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 16px; }
+.stack div { border-top: 2px solid var(--ink); padding-top: 12px; }
+.stack h3 { font-size: 1rem; font-family: var(--font-mono); font-weight: 500; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 8px; }
+.stack ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; color: var(--muted); font-size: 15px; }
+
+/* Proceso */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; counter-reset: s; }
+.steps li {
+  counter-increment: s;
+  display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 4px 16px;
+  padding-block: 18px; border-top: 1px solid var(--line);
+}
+.steps li:first-child { border-top: 0; padding-top: 0; }
+.steps li::before {
+  content: counter(s); font-family: var(--font-mono); font-size: 14px; color: var(--accent);
+  grid-row: span 2; padding-top: 4px;
+}
+.steps b { font-family: var(--font-display); font-size: 1.15rem; }
+.steps p { color: var(--muted); max-width: 60ch; }
+
+/* Contacto */
+.contact { display: grid; gap: 20px; justify-items: start; }
+.contact h2 { font-size: clamp(1.9rem, 5vw, 3rem); max-width: 18ch; }
+.contact .big { font-size: 17px; padding: 14px 24px; }
+.note { font-size: 14px; color: var(--muted); }
+footer { padding-top: 32px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+
+/* Cerebro en Obsidian */
+.brain { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px 48px; align-items: center; }
+@media (max-width: 820px) { .brain { grid-template-columns: minmax(0, 1fr); } }
+.brain h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); letter-spacing: -0.01em; margin: 8px 0 14px; }
+.brain .intro { color: var(--muted); max-width: 54ch; }
+.brain ul { list-style: none; margin: 20px 0 0; padding: 0; display: grid; }
+.brain li { padding-block: 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
+.brain li b { color: var(--ink); font-weight: 600; display: block; }
+.brain-note { margin-top: 14px; font-size: 13px; color: var(--muted); }
+.graph { border: 1px solid var(--line); border-radius: 16px; padding: 12px; background-color: var(--sunken);
+  background-image: radial-gradient(color-mix(in srgb, var(--muted) 38%, transparent) 1px, transparent 1.3px); background-size: 18px 18px; min-width: 0; }
+.graph svg { display: block; width: 100%; height: auto; max-width: 440px; margin-inline: auto; }
+.g-line { stroke: color-mix(in srgb, var(--muted) 55%, transparent); stroke-width: 1.2; fill: none; }
+.g-label { font: 500 12px var(--font-body); fill: var(--ink); text-anchor: middle; paint-order: stroke; stroke: var(--sunken); stroke-width: 4px; stroke-linejoin: round; }
+.g-core { fill: var(--ink); }
+.n-in { fill: var(--c-in); } .n-auto { fill: var(--c-auto); } .n-ai { fill: var(--c-ai); } .n-data { fill: var(--c-data); } .n-out { fill: var(--c-out); } .n-mute { fill: var(--muted); }
+.g-halo { fill: none; stroke: var(--ink); stroke-opacity: .18; stroke-width: 1.2; }
+
+/* Frentes */
+.fronts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 820px) { .fronts { grid-template-columns: minmax(0, 1fr); } }
+.front { background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--ink); border-radius: 8px; padding: 24px; min-width: 0; display: grid; gap: 10px; align-content: start; }
+.front:first-child { border-top-color: var(--accent); }
+.front h3 { font-size: 1.5rem; }
+.front ul { list-style: none; margin: 8px 0 0; padding: 0; display: grid; }
+.front li { padding-block: 10px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
+.front li b { color: var(--ink); font-weight: 600; }
+
+/* Ofertas */
+.offers { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; }
+.offer { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 22px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.offer.main { border-color: var(--accent); }
+.offer.main > .label { color: var(--accent); }
+.offer h3 { font-size: 1.3rem; }
+.offer p { color: var(--muted); font-size: 15px; }
+.offer .deliv { color: var(--ink); border-top: 1px solid var(--line); padding-top: 10px; }
+
+/* Preguntas */
+.faq { display: grid; max-width: 760px; }
+.faq details { border-top: 1px solid var(--line); padding-block: 4px; }
+.faq details:last-child { border-bottom: 1px solid var(--line); }
+.faq summary { cursor: pointer; font-family: var(--font-display); font-size: 1.1rem; font-weight: 500; padding-block: 12px; }
+.faq details p { color: var(--muted); padding-bottom: 14px; max-width: 62ch; }
+
+/* Boton flotante */
+.float-wa {
+  position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 10; box-shadow: 0 6px 20px rgba(0,0,0,.25);
+  background: var(--signal); border-color: var(--signal); color: var(--bg);
+}
+@media (prefers-reduced-motion: no-preference) { .btn { transition: filter .15s; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 8 8 6 8-6"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3 5 13h6l-1 8 8-10h-6z"/></symbol>
+  <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2z"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 21h4"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3 10 14"/><path d="M21 3l-7 18-4-7-7-4z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></symbol>
+</svg>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">Andres Galvis</div>
+    <nav aria-label="Secciones">
+      <a href="#servicios">Servicios</a>
+      <a href="#ejemplos">Ejemplos</a>
+      <a href="#cerebro">Método</a>
+      <a href="#contratar">Contratar</a>
+      <a href="#preguntas">Preguntas</a>
+      <a class="btn small primary" data-wa href="#contacto">WhatsApp</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="status"><i></i> Ingeniería de IA y datos · Recibiendo proyectos</div>
+      <h1>Convierto tus correos y archivos en datos que <em>se procesan solos</em>.</h1>
+      <p class="lede">Soy <strong>ingeniero de IA</strong>. Diseño automatizaciones que leen con inteligencia artificial los correos y documentos de tu empresa, guardan la información en tablas ordenadas de Databricks y avisan por Teams o por correo a quien debe actuar. Trabajo en dos frentes: <strong>IA aplicada</strong> y <strong>datos</strong>.</p>
+      <div class="cta">
+        <a class="btn primary" data-wa href="#contacto">Escríbeme por WhatsApp</a>
+        <a class="btn" href="#ejemplos">Ver ejemplos de flujos</a>
+      </div>
+
+      <ol class="flow" aria-label="Flujo general de las automatizaciones">
+        <li class="node t-in"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg></span><div><span class="label">Entra</span><b>Correo</b><span class="sub">Mensaje o adjunto: PDF, Excel, texto</span></div></li>
+        <li class="node t-auto"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-bolt"/></svg></span><div><span class="label">Automatiza</span><b>n8n o Power Automate</b><span class="sub">Detecta el correo y lo descarga</span></div></li>
+        <li class="node t-ai"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-sparkle"/></svg></span><div><span class="label">Entiende</span><b>IA</b><span class="sub">Extrae datos, clasifica y resume</span></div></li>
+        <li class="node t-data"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-db"/></svg></span><div><span class="label">Guarda</span><b>Tabla en Databricks</b><span class="sub">Un registro por cada correo procesado</span></div></li>
+        <li class="node t-out"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-bell"/></svg></span><div><span class="label">Avisa</span><b>Teams o correo</b><span class="sub">Según la regla de cada caso</span></div></li>
+      </ol>
+      <p class="flow-cap">El flujo base. Cambian las reglas, los campos y los destinatarios según tu proceso.</p>
+    </div>
+
+    <section id="servicios">
+      <div class="sec-head">
+        <span class="label">Servicios</span>
+        <h2>Dos frentes que trabajan juntos</h2>
+        <p>La IA entiende lo que llega. Los datos lo guardan, lo ordenan y lo dejan listo para consultar y para avisar.</p>
+      </div>
+      <div class="fronts">
+        <div class="front">
+          <span class="label">Frente 1 · IA</span>
+          <h3>Inteligencia artificial aplicada</h3>
+          <ul>
+            <li><b>Extracción de documentos.</b> Facturas, declaraciones y PDF pasan a campos estructurados.</li>
+            <li><b>Clasificación de mensajes.</b> Tipo, urgencia y área responsable de cada correo.</li>
+            <li><b>Resúmenes automáticos.</b> Correos, reportes y conversaciones largas en pocas líneas.</li>
+            <li><b>Asistentes sobre tus documentos.</b> Responden preguntas citando de dónde sale la respuesta.</li>
+            <li><b>Revisión humana.</b> Cuando la IA no está segura, una persona confirma antes de actuar.</li>
+          </ul>
+        </div>
+        <div class="front">
+          <span class="label">Frente 2 · Datos</span>
+          <h3>Datos y bases de datos</h3>
+          <ul>
+            <li><b>Pipelines de datos.</b> De Databricks y Azure Blob Storage hasta SharePoint y Power Apps.</li>
+            <li><b>Tablas en Databricks.</b> Un registro ordenado por cada correo o archivo procesado.</li>
+            <li><b>Consultas y reportes SQL.</b> SQL Server sobre Dynamics NAV y Business Central.</li>
+            <li><b>Archivos grandes.</b> Procesamiento por lotes de CSV con miles de filas.</li>
+            <li><b>Integración con ERP.</b> Conexión con SAP HANA y Dynamics NAV.</li>
+            <li><b>Validación de datos.</b> Reglas que revisan formato y totales antes de guardar.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="ejemplos">
+      <div class="sec-head">
+        <span class="label">Ejemplos de flujos</span>
+        <h2>Así se ve cada automatización</h2>
+        <p>Cuatro ejemplos de lo que puedo construir. Son maquetas ilustrativas con datos ficticios: muestran el recorrido, no son capturas de una herramienta ni de un cliente.</p>
+      </div>
+
+      <div class="examples">
+
+        <!-- Ejemplo 1 -->
+        <article class="ex">
+          <div class="ex-head">
+            <span class="label">Ejemplo 1 · Finanzas</span>
+            <h3>Facturas de proveedores</h3>
+            <p>Las facturas llegan por correo en PDF. La automatización las lee, guarda los datos en una tabla y avisa antes de que venzan.</p>
+          </div>
+          <ol class="flow" aria-label="Pasos del flujo de facturas">
+            <li class="node t-in"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg></span><div><span class="label">Entra</span><b>Correo</b><span class="sub">Factura en PDF adjunta</span></div></li>
+            <li class="node t-auto"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-bolt"/></svg></span><div><span class="label">Automatiza</span><b>n8n</b><span class="sub">Descarga el adjunto</span></div></li>
+            <li class="node t-ai"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-sparkle"/></svg></span><div><span class="label">Entiende</span><b>IA</b><span class="sub">Proveedor, valor y vencimiento</span></div></li>
+            <li class="node t-data"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-db"/></svg></span><div><span class="label">Guarda</span><b>Databricks</b><span class="sub">facturas_recibidas</span></div></li>
+            <li class="node t-out"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg></span><div><span class="label">Avisa</span><b>Teams</b><span class="sub">Si vence en 3 días o menos</span></div></li>
+          </ol>
+          <div class="mocks">
+            <div class="panel">
+              <span class="label t-in"><i>1</i>Entra</span>
+              <div class="mock mail">
+                <dl><dt>De</dt><dd>facturacion@proveedor-c.example</dd><dt>Asunto</dt><dd>Factura FE-1044 de octubre</dd></dl>
+                <hr>
+                <p>Buen día. Adjuntamos la factura del mes. Quedamos atentos.</p>
+                <span class="clip">PDF · FE-1044.pdf</span>
+              </div>
+            </div>
+            <div class="panel">
+              <span class="label t-data"><i>2</i>Se guarda</span>
+              <div class="mock tbl-wrap">
+                <table class="dt">
+                  <caption>main.finanzas.facturas_recibidas</caption>
+                  <thead><tr><th>factura</th><th>proveedor</th><th class="num">valor_cop</th><th>vence</th><th>estado</th></tr></thead>
+                  <tbody>
+                    <tr><td>FE-1042</td><td>Proveedor A</td><td class="num">4.850.000</td><td>2026-10-14</td><td><span class="chip idle">por pagar</span></td></tr>
+                    <tr><td>FE-1043</td><td>Proveedor B</td><td class="num">1.220.000</td><td>2026-10-30</td><td><span class="chip idle">por pagar</span></td></tr>
+                    <tr><td>FE-1044</td><td>Proveedor C</td><td class="num">9.700.000</td><td>2026-10-12</td><td><span class="chip hot">urgente</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="panel">
+              <span class="label t-out"><i>3</i>Se avisa</span>
+              <div class="mock">
+                <div class="chat-top">Teams · canal Cuentas por pagar</div>
+                <div class="msg">
+                  <span class="av" aria-hidden="true">BOT</span>
+                  <div>
+                    <b>Bot de automatización</b><time>8:02</time>
+                    <p>La factura FE-1044 de Proveedor C vence en 2 días. Valor: $9.700.000.</p>
+                    <span class="chip hot">Vence pronto</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Ejemplo 2 -->
+        <article class="ex">
+          <div class="ex-head">
+            <span class="label">Ejemplo 2 · Servicio al cliente</span>
+            <h3>Solicitudes de clientes</h3>
+            <p>Cada correo de un cliente se clasifica por tipo y urgencia, y llega con un resumen al área que debe responderlo.</p>
+          </div>
+          <ol class="flow" aria-label="Pasos del flujo de solicitudes">
+            <li class="node t-in"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg></span><div><span class="label">Entra</span><b>Correo</b><span class="sub">Mensaje del cliente</span></div></li>
+            <li class="node t-auto"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-bolt"/></svg></span><div><span class="label">Automatiza</span><b>Power Automate</b><span class="sub">Detecta el correo nuevo</span></div></li>
+            <li class="node t-ai"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-sparkle"/></svg></span><div><span class="label">Entiende</span><b>IA</b><span class="sub">Tipo, urgencia y resumen</span></div></li>
+            <li class="node t-data"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-db"/></svg></span><div><span class="label">Guarda</span><b>Databricks</b><span class="sub">solicitudes</span></div></li>
+            <li class="node t-out"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-send"/></svg></span><div><span class="label">Avisa</span><b>Correo</b><span class="sub">Al responsable del área</span></div></li>
+          </ol>
+          <div class="mocks">
+            <div class="panel">
+              <span class="label t-in"><i>1</i>Entra</span>
+              <div class="mock mail">
+                <dl><dt>De</dt><dd>cliente@ejemplo.example</dd><dt>Asunto</dt><dd>Mi pedido 5521 llegó con una pieza dañada</dd></dl>
+                <hr>
+                <p>Buenas tardes. Recibí el pedido hoy y una de las piezas viene rota. Necesito que me la cambien lo antes posible.</p>
+              </div>
+            </div>
+            <div class="panel">
+              <span class="label t-data"><i>2</i>Se guarda</span>
+              <div class="mock tbl-wrap">
+                <table class="dt">
+                  <caption>main.servicio.solicitudes</caption>
+                  <thead><tr><th>id</th><th>tipo</th><th>urgencia</th><th>area</th><th>estado</th></tr></thead>
+                  <tbody>
+                    <tr><td>S-201</td><td>reclamo</td><td><span class="chip hot">alta</span></td><td>postventa</td><td>nuevo</td></tr>
+                    <tr><td>S-202</td><td>cotización</td><td><span class="chip warn">media</span></td><td>ventas</td><td>nuevo</td></tr>
+                    <tr><td>S-203</td><td>consulta</td><td><span class="chip idle">baja</span></td><td>soporte</td><td>nuevo</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="panel">
+              <span class="label t-out"><i>3</i>Se avisa</span>
+              <div class="mock mail">
+                <dl><dt>Para</dt><dd>postventa@empresa.example</dd><dt>Asunto</dt><dd>[Alta] Reclamo S-201</dd></dl>
+                <hr>
+                <p>Resumen: el cliente recibió el pedido 5521 con una pieza dañada y pide el cambio. Conviene responder hoy.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Ejemplo 3 -->
+        <article class="ex">
+          <div class="ex-head">
+            <span class="label">Ejemplo 3 · Operación</span>
+            <h3>Reportes diarios de las sedes</h3>
+            <p>Cada sede envía su Excel por correo. Se consolidan en una sola tabla y se avisa si alguna sede no reportó.</p>
+          </div>
+          <ol class="flow" aria-label="Pasos del flujo de reportes">
+            <li class="node t-in"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg></span><div><span class="label">Entra</span><b>Correo</b><span class="sub">Excel de cada sede</span></div></li>
+            <li class="node t-auto"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-bolt"/></svg></span><div><span class="label">Automatiza</span><b>n8n</b><span class="sub">Lee las hojas del archivo</span></div></li>
+            <li class="node t-auto"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg></span><div><span class="label">Valida</span><b>Reglas</b><span class="sub">Revisa formato y totales</span></div></li>
+            <li class="node t-data"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-db"/></svg></span><div><span class="label">Guarda</span><b>Databricks</b><span class="sub">ventas_diarias</span></div></li>
+            <li class="node t-out"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-send"/></svg></span><div><span class="label">Avisa</span><b>Correo</b><span class="sub">Resumen a gerencia</span></div></li>
+          </ol>
+          <div class="mocks">
+            <div class="panel">
+              <span class="label t-in"><i>1</i>Entra</span>
+              <div class="mock mail">
+                <dl><dt>De</dt><dd>sede.norte@empresa.example</dd><dt>Asunto</dt><dd>Ventas del 9 de octubre</dd></dl>
+                <hr>
+                <p>Se adjunta el cierre del día.</p>
+                <span class="clip">XLSX · ventas_norte.xlsx</span>
+              </div>
+            </div>
+            <div class="panel">
+              <span class="label t-data"><i>2</i>Se guarda</span>
+              <div class="mock tbl-wrap">
+                <table class="dt">
+                  <caption>main.operacion.ventas_diarias</caption>
+                  <thead><tr><th>fecha</th><th>sede</th><th class="num">ventas_cop</th><th class="num">unid.</th><th>estado</th></tr></thead>
+                  <tbody>
+                    <tr><td>2026-10-09</td><td>Norte</td><td class="num">38.400.000</td><td class="num">41</td><td><span class="chip ok">validado</span></td></tr>
+                    <tr><td>2026-10-09</td><td>Sur</td><td class="num">29.150.000</td><td class="num">33</td><td><span class="chip ok">validado</span></td></tr>
+                    <tr><td>2026-10-09</td><td>Centro</td><td class="num">sin dato</td><td class="num">sin dato</td><td><span class="chip warn">pendiente</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="panel">
+              <span class="label t-out"><i>3</i>Se avisa</span>
+              <div class="mock mail">
+                <dl><dt>Para</dt><dd>gerencia@empresa.example</dd><dt>Asunto</dt><dd>Ventas del 9 de octubre</dd></dl>
+                <hr>
+                <p>Total reportado: $67.550.000 en 2 de 3 sedes. Falta el reporte de la sede Centro.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Ejemplo 4 -->
+        <article class="ex">
+          <div class="ex-head">
+            <span class="label">Ejemplo 4 · Logística</span>
+            <h3>Seguimiento de envíos</h3>
+            <p>Los correos de la transportadora se convierten en una tabla de estados, con aviso cuando una entrega se atrasa.</p>
+          </div>
+          <ol class="flow" aria-label="Pasos del flujo de envíos">
+            <li class="node t-in"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg></span><div><span class="label">Entra</span><b>Correo</b><span class="sub">Aviso de la transportadora</span></div></li>
+            <li class="node t-auto"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-bolt"/></svg></span><div><span class="label">Automatiza</span><b>n8n</b><span class="sub">Lee cada correo nuevo</span></div></li>
+            <li class="node t-ai"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-sparkle"/></svg></span><div><span class="label">Entiende</span><b>IA</b><span class="sub">Guía, destino y estado</span></div></li>
+            <li class="node t-data"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-db"/></svg></span><div><span class="label">Guarda</span><b>Databricks</b><span class="sub">envios</span></div></li>
+            <li class="node t-out"><span class="badge"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg></span><div><span class="label">Avisa</span><b>Teams</b><span class="sub">Si hay retraso</span></div></li>
+          </ol>
+          <div class="mocks">
+            <div class="panel">
+              <span class="label t-in"><i>1</i>Entra</span>
+              <div class="mock mail">
+                <dl><dt>De</dt><dd>notificaciones@transportadora.example</dd><dt>Asunto</dt><dd>Actualización de la guía G-7731</dd></dl>
+                <hr>
+                <p>Su envío a Medellín permanece en bodega de origen. Nueva fecha estimada: 13 de octubre.</p>
+              </div>
+            </div>
+            <div class="panel">
+              <span class="label t-data"><i>2</i>Se guarda</span>
+              <div class="mock tbl-wrap">
+                <table class="dt">
+                  <caption>main.logistica.envios</caption>
+                  <thead><tr><th>guia</th><th>destino</th><th>estado</th><th class="num">retraso_dias</th></tr></thead>
+                  <tbody>
+                    <tr><td>G-7729</td><td>Bogotá</td><td><span class="chip ok">en ruta</span></td><td class="num">0</td></tr>
+                    <tr><td>G-7730</td><td>Cali</td><td><span class="chip ok">entregado</span></td><td class="num">0</td></tr>
+                    <tr><td>G-7731</td><td>Medellín</td><td><span class="chip hot">retrasado</span></td><td class="num">3</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="panel">
+              <span class="label t-out"><i>3</i>Se avisa</span>
+              <div class="mock">
+                <div class="chat-top">Teams · canal Logística</div>
+                <div class="msg">
+                  <span class="av" aria-hidden="true">BOT</span>
+                  <div>
+                    <b>Bot de automatización</b><time>9:15</time>
+                    <p>El envío G-7731 a Medellín lleva 3 días de retraso. Último estado: bodega de origen.</p>
+                    <span class="chip hot">Retraso</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+      <p class="ex-note">¿Tu proceso es otro? Mientras llegue por correo o en un archivo, se puede armar el mismo recorrido.</p>
+    </section>
+
+    <section id="herramientas">
+      <div class="sec-head">
+        <span class="label">Herramientas</span>
+        <h2>Con qué construyo</h2>
+      </div>
+      <div class="stack">
+        <div><h3>Automatización</h3><ul><li>n8n</li><li>Power Automate</li><li>RPA</li></ul></div>
+        <div><h3>Inteligencia artificial</h3><ul><li>Extracción de datos de PDF y correos</li><li>Clasificación y resúmenes</li></ul></div>
+        <div><h3>Datos</h3><ul><li>Databricks</li><li>Azure Blob Storage</li><li>SQL Server</li></ul></div>
+        <div><h3>Avisos y apps</h3><ul><li>Microsoft Teams (Graph API)</li><li>SharePoint</li><li>Power Apps</li></ul></div>
+      </div>
+    </section>
+
+    <section id="cerebro">
+      <div class="brain">
+        <div>
+          <span class="label">Mi método</span>
+          <h2>Un pequeño cerebro en Obsidian</h2>
+          <p class="intro">Cada flujo que construyo, cada consulta SQL que funciona y cada error que resuelvo queda anotado en Obsidian, en notas enlazadas entre sí. Así no empiezo de cero en cada proyecto.</p>
+          <ul>
+            <li><b>Soluciones probadas</b>Reutilizo consultas, flujos y prompts que ya funcionaron en otros casos.</li>
+            <li><b>Documentación al día</b>Lo que construyo queda explicado, y esa guía pasa a tu equipo al entregar.</li>
+            <li><b>Menos errores repetidos</b>Cada problema resuelto queda registrado con su causa y su solución.</li>
+          </ul>
+          <p class="brain-note">Mis notas son archivos Markdown: abiertos, ordenados y fáciles de respaldar.</p>
+        </div>
+        <div class="graph">
+          <svg viewBox="0 0 360 300" role="img" aria-label="Mapa ilustrativo de notas enlazadas alrededor de un cerebro central: flujos de n8n, prompts de IA, consultas SQL, errores resueltos, plantillas y proyectos.">
+            <g class="g-line">
+              <path d="M180 150 180 38M180 150 298 92M180 150 298 208M180 150 180 262M180 150 62 208M180 150 62 92"/>
+              <path d="M180 38 298 92M298 92 298 208M180 262 62 208M62 208 62 92M62 92 180 38M298 208 180 262" opacity=".55"/>
+            </g>
+            <circle class="g-halo" cx="180" cy="150" r="18"/>
+            <circle class="g-core" cx="180" cy="150" r="10"/>
+            <text class="g-label" x="180" y="182">Mi cerebro</text>
+            <circle class="n-auto" cx="180" cy="38" r="8"/><text class="g-label" x="180" y="20">Flujos n8n</text>
+            <circle class="n-ai" cx="298" cy="92" r="8"/><text class="g-label" x="298" y="74">Prompts de IA</text>
+            <circle class="n-data" cx="298" cy="208" r="8"/><text class="g-label" x="298" y="236">Consultas SQL</text>
+            <circle class="n-out" cx="180" cy="262" r="8"/><text class="g-label" x="180" y="290">Errores resueltos</text>
+            <circle class="n-in" cx="62" cy="208" r="8"/><text class="g-label" x="62" y="236">Plantillas</text>
+            <circle class="n-mute" cx="62" cy="92" r="8"/><text class="g-label" x="62" y="74">Proyectos</text>
+          </svg>
+          <p class="flow-cap" style="text-align:center;margin-top:8px">Ilustración de cómo se conectan mis notas.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contratar">
+      <div class="sec-head">
+        <span class="label">Formas de contratar</span>
+        <h2>Empieza por lo que necesites</h2>
+        <p>El precio depende del alcance. Lo defino por escrito antes de empezar.</p>
+      </div>
+      <div class="offers">
+        <div class="offer">
+          <span class="label">Para empezar</span>
+          <h3>Diagnóstico</h3>
+          <p>Revisamos tu proceso y te digo qué se puede automatizar, con qué herramientas y cuánto esfuerzo implica.</p>
+          <p class="deliv"><b>Entregable:</b> lista priorizada de automatizaciones.</p>
+        </div>
+        <div class="offer main">
+          <span class="label">Lo más pedido</span>
+          <h3>Automatización a la medida</h3>
+          <p>Un flujo completo, de la entrada al aviso, probado con tus datos reales y documentado.</p>
+          <p class="deliv"><b>Entregable:</b> flujo funcionando y guía de uso.</p>
+        </div>
+        <div class="offer">
+          <span class="label">Después de entregar</span>
+          <h3>Mantenimiento mensual</h3>
+          <p>Seguimiento, ajustes y reglas nuevas para que el flujo siga funcionando cuando tu proceso cambia.</p>
+          <p class="deliv"><b>Entregable:</b> flujo al día y soporte.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="proceso">
+      <div class="sec-head">
+        <span class="label">Cómo trabajamos</span>
+        <h2>De tu idea al flujo funcionando</h2>
+      </div>
+      <ol class="steps">
+        <li><b>Me cuentas el proceso por WhatsApp</b><p>Qué correos recibes, qué haces hoy con ellos y a quién hay que avisar.</p></li>
+        <li><b>Definimos alcance, plazo y precio</b><p>Recibes la propuesta por escrito antes de que empiece el trabajo.</p></li>
+        <li><b>Construyo y pruebo con tus correos</b><p>Ves el flujo funcionando desde temprano y corregimos a tiempo.</p></li>
+        <li><b>Entrega con guía de uso</b><p>El flujo queda documentado para que tu equipo lo pueda mantener.</p></li>
+      </ol>
+    </section>
+
+    <section id="preguntas">
+      <div class="sec-head">
+        <span class="label">Preguntas frecuentes</span>
+        <h2>Antes de escribirme</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>¿Qué necesito para empezar?</summary>
+          <p>Un ejemplo de los correos o archivos que quieres procesar, con los datos sensibles tapados si prefieres, y una descripción de lo que se hace con ellos hoy.</p>
+        </details>
+        <details>
+          <summary>¿Necesito tener Databricks?</summary>
+          <p>No necesariamente. Si ya usas SharePoint, SQL Server u otra base de datos, puedo guardar la información allí. Databricks tiene sentido cuando el volumen de datos lo justifica.</p>
+        </details>
+        <details>
+          <summary>¿Qué pasa si la IA se equivoca?</summary>
+          <p>Defino reglas de validación y, cuando hace falta, una revisión humana antes de que el flujo actúe. Los casos dudosos quedan marcados en la tabla.</p>
+        </details>
+        <details>
+          <summary>¿Cómo se manejan mis datos?</summary>
+          <p>Trabajo con los accesos mínimos necesarios y acordamos por escrito cómo se usa tu información. Si lo necesitas, firmo un acuerdo de confidencialidad.</p>
+        </details>
+        <details>
+          <summary>¿Cuánto tarda y cuánto cuesta?</summary>
+          <p>Depende del alcance. Después de una conversación corta por WhatsApp recibes una propuesta escrita con plazo y precio.</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="contact">
+        <span class="label">Contacto</span>
+        <h2>¿Qué correos te quitan tiempo hoy?</h2>
+        <p style="color:var(--muted);max-width:56ch">Escríbeme por WhatsApp, cuéntame qué recibes y qué haces con cada mensaje. Te digo si se puede automatizar y cómo lo haríamos.</p>
+        <a class="btn primary big" data-wa href="#contacto">Escribir por WhatsApp</a>
+        <p class="note" id="wa-nota" role="status"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Andres Galvis · Ingeniero de IA y datos · Colombia</span>
+    <span class="mono">Correo → Automatización → Databricks → Aviso</span>
+  </footer>
+</div>
+
+<a class="btn float-wa" data-wa href="#contacto" aria-label="Escribir por WhatsApp">WhatsApp</a>
+
+<script>
+(function () {
+  // Número con indicativo de país y sin signos. Ejemplo: '573001234567'
+  var WA_NUMBER = '573195381078';
+  var MENSAJE = 'Hola Andres, vi tu portafolio y quiero automatizar un proceso.';
+  var enlaces = document.querySelectorAll('[data-wa]');
+  var nota = document.getElementById('wa-nota');
+  if (WA_NUMBER) {
+    var url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(MENSAJE);
+    for (var i = 0; i < enlaces.length; i++) {
+      enlaces[i].setAttribute('href', url);
+      enlaces[i].setAttribute('target', '_blank');
+      enlaces[i].setAttribute('rel', 'noopener');
+    }
+    nota.textContent = 'Se abre WhatsApp con un mensaje listo para enviar.';
+  } else {
+    for (var j = 0; j < enlaces.length; j++) { enlaces[j].setAttribute('aria-disabled', 'true'); }
+    nota.textContent = 'El número de WhatsApp aún no está configurado.';
+  }
+})();
+</script>
+</body>
+</html>
